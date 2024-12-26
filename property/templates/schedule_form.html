@@ -1,0 +1,68 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calender</title>
+
+     <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Schedule a Property Visit</h2>
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Property Type Selection -->
+            <div class="form-group">
+                <label for="property_type">Select Property Type:</label>
+                <select name="property_type" id="property_type" required>
+                    <option value="villa" {% if selected_property_type == 'villa' %}selected{% endif %}>Villa</option>
+                    <option value="apartment" {% if selected_property_type == 'apartment' %}selected{% endif %}>Apartment</option>
+                    <option value="penthouse" {% if selected_property_type == 'penthouse' %}selected{% endif %}>Penthouse</option>
+                </select>
+            </div>
+
+            <!-- Property Code Input -->
+            <div class="form-group">
+                <label for="property_code">Enter Property Code:</label>
+                <input type="text" name="property_code" id="property_code" required>
+            </div>
+
+            <!-- User's Name Input -->
+            <div class="form-group">
+                <label for="user_name">Your Name:</label>
+                <input type="text" name="user_name" id="user_name" required>
+            </div>
+
+            <!-- User's Email Input -->
+            <div class="form-group">
+                <label for="user_email">Your Email:</label>
+                <input type="email" name="user_email" id="user_email" required>
+            </div>
+
+            <!-- User's Phone Input (Optional) -->
+            <div class="form-group">
+                <label for="user_phone">Your Phone Number (optional):</label>
+                <input type="tel" name="user_phone" id="user_phone">
+            </div>
+
+            <!-- Visit Date Input -->
+            <div class="form-group">
+                <label for="visit_date">Select Visit Date:</label>
+                <input type="date" id="visit_date" name="visit_date" required>
+            </div>
+
+            <!-- Visit Time Input -->
+            <div class="form-group">
+                <label for="visit_time">Select Visit Time:</label>
+                <input type="time" id="visit_time" name="visit_time" required>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="main-button">
+                <button type="submit">Schedule Visit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Scheduled - Confirmation</title>
+    <style>
+        /* Global reset and font styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Main confirmation box */
+        .confirmation-message {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        .confirmation-message h1 {
+            font-size: 2.5rem;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .confirmation-message p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .confirmation-message {
+                padding: 20px 25px;
+            }
+
+            .confirmation-message h1 {
+                font-size: 2rem;
+            }
+
+            .confirmation-message p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+  {% block content %}
+    <div class="confirmation-message">
+        <h1>Visit Scheduled Successfully!</h1>
+        <p>Your visit for property {{ property_id }} is confirmed for {{ visit_datetime }}.</p>
+        <a href="{% url 'properties' %}" class="btn">Back to Properties</a>
+    </div>
+  {% endblock %}
+
+</body>
+</html>

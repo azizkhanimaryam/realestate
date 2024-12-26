@@ -1,0 +1,176 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Villa Agency - Property Detail Page</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-villa-agency.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+  </head>
+
+<body>
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <div class="sub-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-8">
+          <ul class="info">
+            <li><i class="fa fa-envelope"></i> info@company.com</li>
+            <li><i class="fa fa-map"></i> Sunny Isles Beach, FL 33160</li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <ul class="social-links">
+            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://x.com/minthu" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <h1>Villa</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="{% url 'index' %}" class="active">Home</a></li>
+                      <li><a href="{% url 'properties' %}">Properties</a></li>
+                      <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                      <li><a href="{% url 'schedule_visit' %}"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <span class="breadcrumb"><a href="{% url 'index' %}">Home</a>  /  Single Property</span>
+          <h3>Single Property</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- property-details.html ###-->
+<div class="single-property section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+       <div class="main-image">
+            <h3>Images for {{ property.name }}</h3>
+            {% for image in images %}
+                <img src="{{ image.image.url }}" alt="Image of {{ property.name }}" class="img-fluid">
+            {% empty %}
+                <p>No images available.</p>
+            {% endfor %}
+       </div>
+
+        <div class="main-content">
+          <p>The class name of the villa is: {{ class_name }}</p>
+          <h4>{{ property.address }}</h4>
+          <p>{{ property.description }}</p>
+        </div>
+
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Best useful links ?
+              </button>
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Sidebar (Info Table) -->
+      <div class="col-lg-4">
+        <div class="info-table">
+          <ul>
+            <li><h4><span>Name</span><br>{{ property.name}}</h4></li>
+            <li><h4><span>Code</span><br>{{ property.code}}</h4></li>
+            <li><h4><span>Price</span><br>{{ property.price}} $</h4></li>
+            <li><h4><span>Address</span><br>{{ property.location}}</h4></li>
+            <li><h4><span>Number of rooms</span><br>{{ property.bedrooms }}</h4></li>
+            <li><h4><span>Number of bathrooms</span><br>{{ property.bathrooms }}</h4></li>
+            <li><h4><span>Total flat area</span><br>{{ property.area}} m²</h4></li>
+            <li><h4><span>Number of floors</span><br>{{ property.floor}}</h4></li>
+            <li><h4><span>Parking Available</span><br>{{ property.parking}}</h4></li>
+            <li><h4><span>Payment Process</span><br>{{ property.payment_process }}</h4></li>
+            <!-- Insert Carousel for Property Images +++-->
+            <h3>Images for {{ property.name }}</h3>
+                {% for image in images %}
+                    <img src="{{ image.image.url }}" alt="Property Image" class="img-fluid">
+                {% empty %}
+                    <p>No images available.</p>
+                {% endfor %}
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <footer class="footer-no-gap">
+    <div class="container">
+      <div class="col-lg-12">
+        <p>Copyright © 2048 Villa Agency Co., Ltd. All rights reserved. 
+        
+        Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/counter.js' %}"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,260 @@
+{% load static %}
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Villa Agency - Property Listing by TemplateMo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-villa-agency.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+<!--
+
+TemplateMo 591 villa agency
+
+https://templatemo.com/tm-591-villa-agency
+
+-->
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <div class="sub-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-8">
+          <ul class="info">
+            <li><i class="fa fa-envelope"></i> info@company.com</li>
+            <li><i class="fa fa-map"></i> Sunny Isles Beach, FL 33160</li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <ul class="social-links">
+            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://x.com/minthu" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <h1>Villa</h1>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="{% url 'index' %}" class="active">Home</a></li>
+                      <li><a href="{% url 'properties' %}">Properties</a></li>
+                      <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                      <li><a href="{% url 'schedule_visit' %}"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <span class="breadcrumb"><a href="{% url 'index' %}" class="active">Home</a> / Properties</span>
+          <h3>Properties</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section properties">
+    <div class="container">
+      <ul class="properties-filter">
+        <li>
+          <a class="is_active" href="#!" data-filter="*">Show All</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".adv">Apartment</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".str">Villa House</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".rac">Penthouse</a>
+        </li>
+      </ul>
+      <div class="row properties-box">
+            {% for villa in villas %}
+                <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 str">
+                    <div class="item">
+                        <!-- Property Image and Info -->
+                        <img src="{{ villa.main_image }}" alt="{{ villa.name }}">
+                        <a href="{% url 'property_details' property_type='villa' property_id=villa.id %}"><img src="{{ villa.image.url }}" alt=""></a>
+                        <span class="category">Luxury Villa</span>
+                        <h6>${{ villa.price }}</h6>
+                        <h4><a href="{% url 'property_details' property_type='villa' property_id=villa.id %}">{{ villa.name }}</a></h4>
+                        <ul>
+                            <li>Bedrooms: <span>{{ villa.bedrooms }}</span></li>
+                            <li>Bathrooms: <span>{{ villa.bathrooms }}</span></li>
+                            <li>Area: <span>{{ villa.area }} m²</span></li>
+                            <li>Floor: <span>{{ villa.floor }}</span></li>
+                            <li>Parking: <span>{{ villa.parking }} spots</span></li>
+                        </ul>
+
+                        <!-- Property Details Button (First) -->
+                        <div class="main-button">
+                            <a href="{% url 'property_details' property_type='villa' property_id=villa.id %}" class="btn btn-info">Property Details</a>
+                        </div>
+                        <!-- Schedule a Visit Button (Second) -->
+                        <form method="POST" action="{% url 'schedule_visit' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="property_id" value="{{ villa.id }}">
+                            <div class="main-button">
+                                <button type="submit" class="btn btn-primary">Schedule a Visit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+            {% for apartment in apartments %}
+                <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 adv">
+                    <div class="item">
+                        <!-- Property Image and Info -->
+                        <img src="{{ apartment.main_image }}" alt="{{ apartment.name }}">
+                        <a href="{% url 'property_details' property_type='apartment' property_id=apartment.id %}"><img src="{{ apartment.image.url }}" alt=""></a>
+                        <span class="category">Apartment</span>
+                        <h6>${{ apartment.price }}</h6>
+                        <h4><a href="{% url 'property_details' property_type='apartment' property_id=apartment.id %}">{{ apartment.name }}</a></h4>
+                        <ul>
+                            <li>Bedrooms: <span>{{ apartment.bedrooms }}</span></li>
+                            <li>Bathrooms: <span>{{ apartment.bathrooms }}</span></li>
+                            <li>Area: <span>{{ apartment.area }} m²</span></li>
+                            <li>Floor: <span>{{ apartment.floor }}</span></li>
+                            <li>Parking: <span>{{ apartment.parking }} spots</span></li>
+                        </ul>
+
+                        <!-- Property Details Button (First) -->
+                        <div class="main-button">
+                            <a href="{% url 'property_details' property_type='apartment' property_id=apartment.id %}" class="btn btn-info">Property Details</a>
+                        </div>
+
+                        <!-- Schedule a Visit Button (Second) -->
+                        <form method="POST" action="{% url 'schedule_visit' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="property_id" value="{{ apartment.id }}">
+                            <div class="main-button">
+                                <button type="submit" class="btn btn-primary">Schedule a Visit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for penthouse in penthouses %}
+                <div class="col-lg-4 col-md-6 align-self-center mb-30 properties-items col-md-6 rac">
+                    <div class="item">
+                        <!-- Property Image and Info -->
+                        <img src="{{ penthouse.main_image }}" alt="{{ penthouse.name }}">
+                        <a href="{% url 'property_details' property_type='penthouse' property_id=penthouse.id %}"><img src="{{ penthouse.image.url }}" alt=""></a>
+                        <span class="category">Penthouse</span>
+                        <h6>${{ penthouse.price }}</h6>
+                        <h4><a href="{% url 'property_details' property_type='penthouse' property_id=penthouse.id %}">{{ penthouse.name }}</a></h4>
+                        <ul>
+                            <li>Bedrooms: <span>{{ penthouse.bedrooms }}</span></li>
+                            <li>Bathrooms: <span>{{ penthouse.bathrooms }}</span></li>
+                            <li>Area: <span>{{ penthouse.area }} m²</span></li>
+                            <li>Floor: <span>{{ penthouse.floor }}</span></li>
+                            <li>Parking: <span>{{ penthouse.parking }} spots</span></li>
+                        </ul>
+
+                        <!-- Property Details Button (First) -->
+                        <div class="main-button">
+                            <a href="{% url 'property_details' property_type='penthouse' property_id=penthouse.id %}" class="btn btn-info">Property Details</a>
+                        </div>
+
+                        <!-- Schedule a Visit Button (Second) -->
+                        <form method="POST" action="{% url 'schedule_visit' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="property_id" value="{{ penthouse.id }}">
+                            <div class="main-button">
+                                <button type="submit" class="btn btn-primary">Schedule a Visit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="pagination">
+            <li><a href="#">1</a></li>
+            <li><a class="is_active" href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">>></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="col-lg-12">
+        <p>Copyright © 2048 Villa Agency Co., Ltd. All rights reserved. 
+        
+        Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/isotope.min.js' %}"></script>
+  <script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+  <script src="{% static 'assets/js/counter.js' %}"></script>
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+
+  </body>
+</html>
